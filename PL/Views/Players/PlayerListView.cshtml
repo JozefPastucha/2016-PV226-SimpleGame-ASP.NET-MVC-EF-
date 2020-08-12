@@ -1,0 +1,37 @@
+﻿@using System.Web.Mvc.Html
+@using X.PagedList.Mvc
+@using X.PagedList
+
+@model PL.Models.PlayerListViewModel
+
+@{
+    ViewBag.Title = "PlayerListView";
+}
+
+<h2>PlayerListView</h2>
+
+<table class="table">
+
+    @foreach (var item in Model.Players)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.ActionLink("Delete", "DeletePlayer", new { id = item.ID })
+            </td>
+            <td>
+                @Html.ActionLink("Villages", "Index", "Villages", new { UserName = item.UserName }, null)
+            </td>
+        </tr>
+    }
+
+</table>
+
+<div class="col-md-12">
+    @Html.PagedListPager(Model.Players, page => Url.Action("Index", new { page }))
+</div>

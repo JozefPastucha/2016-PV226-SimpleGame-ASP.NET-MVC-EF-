@@ -1,0 +1,134 @@
+﻿@model PL.Models.BuildingListViewModel
+
+@{
+    ViewBag.Title = "BuildingListView";
+}
+
+<h2>Buildings</h2>
+
+@Html.ActionLink("BackToVillage", "VisitVillage", "Villages", new { id = Model.VillageId }, null)
+
+<br />
+<br />
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Buildings[0].BuildingType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Buildings[0].Built)
+        </th>
+        
+        <th>
+            @Html.DisplayNameFor(model => model.Buildings[0].ProductionPerWorker)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Buildings[0].WorkersAssigned)
+        </th>
+        <th>
+            Production
+        </th>
+        <th>
+            Add Workers
+        </th>
+        <th>
+            Remove Workers
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Buildings[0].Cost)
+        </th>
+        <th>
+            Build
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.Buildings)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.BuildingType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Built)
+            </td>
+
+            @if (item.ResourceType != null)
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductionPerWorker)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.WorkersAssigned)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Production)
+                </td>
+            }
+            else
+            {
+                <td> </td>
+                <td> </td>
+                <td> </td>
+            }
+
+            @if (item.Built && item.ResourceType != null)
+            {
+                <td>
+                    <input type="button" class="btn btn-primary" value="Add Workers" onclick="location.href = '@Url.Action("AddWorkers", "Buildings", item)'" />
+                </td>
+                <td>
+                    <input type="button" class="btn btn-primary" value="Remove Workers" onclick="location.href = '@Url.Action("RemoveWorkers", "Buildings", item)'" />
+                </td>
+            }
+            else if (!item.Built)
+            {
+                <td> </td>
+                <td> </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cost)
+                </td>
+                <td>
+                    @Html.ActionLink("Build", "BuildBuilding", item)
+                </td>
+
+            }
+            else
+            {
+
+                <td> </td>
+                <td> </td>
+            }
+
+
+        </tr>
+    }
+
+    <tr>
+        <td>
+            Huts
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.Huts)
+        </td>
+
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.HutCost)
+        </td>
+
+        <td>
+            @Html.ActionLink("1", "BuildHut", new { id = Model.VillageId, amount = 1 })
+        </td>
+        <td>
+            @Html.ActionLink("10", "BuildHut", new { id = Model.VillageId, amount = 10 })
+        </td>
+    </tr>
+
+</table>

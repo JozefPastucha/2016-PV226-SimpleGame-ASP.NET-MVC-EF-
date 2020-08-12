@@ -1,0 +1,40 @@
+﻿@using System.Web.Mvc.Html
+@using X.PagedList.Mvc
+@using X.PagedList
+@model IPagedList<BL.DTOs.Players.PlayerDTO>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Highscore</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Username
+        </th>
+        <th>
+            Number of villages
+        </th>
+
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumOfVillages)
+            </td>
+        </tr>
+    }
+
+
+       
+
+</table>
+
+<div class="col-md-12">
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+</div>

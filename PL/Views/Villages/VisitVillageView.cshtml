@@ -1,0 +1,70 @@
+﻿@model PL.Models.VisitVillageViewModel
+
+@{
+    ViewBag.Title = "VisitVillage";
+}
+
+<h2>VisitVillage</h2>
+
+
+    @Html.ActionLink("Buildings", "Index", "Buildings", new { id = Model.VillageId }, null) |
+    @Html.ActionLink("Products", "Index", "Products",  new { id = Model.VillageId }, null) |
+    @Html.ActionLink("Training", "Index", "Units", new { id = Model.VillageId }, null) |
+    @Html.ActionLink("Adventures", "Index", "Adventures", new { id = Model.VillageId }, null)
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Resources[0].ResourceType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Resources[0].Amount)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.Resources)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ResourceType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+        </tr>
+    }
+
+</table>
+
+<br />
+
+
+<br />
+
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Products[0].ProductType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Products[0].Amount)
+        </th>
+    </tr>
+
+    @foreach (var item in Model.Products)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+        </tr>
+    }
+
+</table>

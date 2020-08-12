@@ -1,0 +1,66 @@
+﻿@model PL.Models.UnitsListViewModel
+
+@{
+    ViewBag.Title = "UnitsListView";
+}
+
+<h2>Units</h2>
+
+@Html.ActionLink("BackToVillage", "VisitVillage", "Villages", new { id = Model.VillageId }, null)
+
+<br />
+<br />
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Units[0].UnitType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Units[0].HP)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Units[0].Damage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Units[0].Cost)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Units[0].Count)
+        </th>
+        <th>
+            Train
+        </th>
+        
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.Units)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UnitType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HP)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Damage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cost)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Count)
+            </td>
+            <td>
+                @Html.ActionLink("1", "TrainUnit", new { id = item.ID, amount = 1, Model.VillageId })
+            </td>
+            <td>
+                @Html.ActionLink("10", "TrainUnit", new { id = item.ID, amount = 10, Model.VillageId })
+            </td>
+        </tr>
+    }
+
+</table>

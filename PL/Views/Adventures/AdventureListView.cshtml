@@ -1,0 +1,105 @@
+﻿@model PL.Models.AdventureListViewModel
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Adventures</h2>
+
+@Html.ActionLink("BackToVillage", "VisitVillage", "Villages", new { id = Model.VillageID }, null)
+
+<br />
+<br />
+
+@Html.HiddenFor(model => model.Units)
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Units[0].UnitType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Units[0].Count)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.Units)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UnitType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Count)  
+            </td>
+        </tr>
+    }
+
+</table>
+
+<br />
+<br />
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Adventures[0].Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Adventures[0].Enemy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Adventures[0].EnemyCount)
+        </th>
+
+        <th>
+            Bread needed for 1 unit
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Adventures[0].ResourcesReward)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Adventures[0].ProductsReward)
+        </th>
+        <th>
+
+        </th>
+        <th></th>
+    </tr>
+
+
+    @foreach (var item in Model.Adventures)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Enemy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EnemyCount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BreadPerUnit)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ResourcesReward)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductsReward)
+            </td>
+            <th>
+                @Html.ActionLink("Go", "ChooseUnits", new PL.Models.AdventuresChooseUnitsModel { VillageID = Model.VillageID, AdventureTypeId = item.ID })
+            </th>
+        </tr>
+    }
+</table>
+
+<br />
+<br />
+
+        @if (Model.Adventures.Where(a => a.Enemy.Equals("Dragon")).SingleOrDefault() != null && Model.Adventures.Where(a => a.Enemy.Equals("Dragon")).SingleOrDefault().Accomplished)
+        {
+            @Html.ActionLink("SettleNewVillage", "SettleNewVillage", new { id = Model.VillageID })
+        }

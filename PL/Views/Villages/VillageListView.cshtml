@@ -1,0 +1,30 @@
+﻿@using System.Web.Mvc.Html
+@using X.PagedList.Mvc
+@using X.PagedList
+
+@model PL.Models.VillageListViewModel
+@{
+    ViewBag.Title = "Villages";
+}
+
+<h2>Villages</h2>
+
+<table class="table">
+    
+    @foreach (var item in Model.Villages)
+    {
+        <tr>
+            <td>
+                Village @Html.DisplayFor(modelItem => item.Number)
+            </td>
+            <td>
+                @Html.ActionLink("Visit", "VisitVillage", new { id = item.ID }) 
+            </td>
+        </tr>
+    }
+
+</table>
+
+<div class="col-md-12">
+    @Html.PagedListPager(Model.Villages, page => Url.Action("Index", new { page }))
+</div>

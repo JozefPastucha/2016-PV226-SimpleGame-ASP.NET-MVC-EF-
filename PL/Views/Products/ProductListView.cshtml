@@ -1,0 +1,54 @@
+﻿@model PL.Models.ProductsListViewModel
+
+@{
+    ViewBag.Title = "ProductListView";
+}
+
+<h2>Products</h2>
+
+@Html.ActionLink("BackToVillage", "VisitVillage", "Villages", new { id = Model.VillageId }, null)
+
+<br />
+<br />
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Products[0].ProductType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Products[0].Cost)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Products[0].Amount)
+        </th>
+        <th>
+            Produce
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.Products)
+    {
+        
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cost)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+           
+            <td>
+                @Html.ActionLink("1", "ProduceProduct", new { id = item.ID, amount = 1, villageId = Model.VillageId })
+            </td>
+            <td>
+                @Html.ActionLink("10", "ProduceProduct", new { id = item.ID, amount = 10, villageId = Model.VillageId })
+            </td>
+        </tr>
+    }
+
+</table>
